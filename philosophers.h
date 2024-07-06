@@ -6,7 +6,7 @@
 /*   By: rkawahar <rkawahar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 12:30:52 by rkawahar          #+#    #+#             */
-/*   Updated: 2024/06/26 17:33:08 by rkawahar         ###   ########.fr       */
+/*   Updated: 2024/07/06 15:11:23 by rkawahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <stdarg.h>
+# include <limits.h>
+
+typedef struct s_info
+{
+	int	*members;
+	int	*limit;
+	int	*eat;
+	int	*sleep;
+	int	*meal;
+}	t_info;
 
 int		ft_printf(const char *str, ...);
 int		ft_print_itoa(int num, int len);

@@ -6,7 +6,7 @@
 /*   By: rkawahar <rkawahar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 13:31:06 by rkawahar          #+#    #+#             */
-/*   Updated: 2024/06/26 14:52:02 by rkawahar         ###   ########.fr       */
+/*   Updated: 2024/07/06 15:04:34 by rkawahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,10 @@ void	argc_error(void)
 	ft_printf("number_of_times_each_philosopher_must_eat times, the ");
 	ft_printf("simulation stops. If not specified, the simulation stops ");
 	ft_printf("when a philosopher dies.\n");
+}
+
+void	number_error(void)
+{
+	ft_printf("The number would be bigger than 0, smaller than %ld\n", INT_MAX);
+	exit(0);
 }
