@@ -3,107 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkawahar <rkawahar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kawaharadaryou <kawaharadaryou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 13:23:34 by rkawahar          #+#    #+#             */
-/*   Updated: 2024/07/06 15:19:47 by rkawahar         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:34:49 by kawaharadar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static int	checker(char c, long num, int flg)
+int	ft_atoi(char *str)
 {
-	if (num == 0)
-		return (0);
-	if (flg == -1)
-	{
-		num *= -1;
-		if ((LONG_MIN + (c - '0')) / 10 > num)
-			return (1);
-	}
-	else
-	{
-		if ((LONG_MAX - (c - '0')) / 10 < num)
-			return (1);
-	}
-	return (0);
-}
+	int	ans;
+	int	i;
+	int	tmp;
 
-int	checker2(int flg)
-{
-	if (flg == 1)
-		return ((int)LONG_MAX);
-	else
-		return ((int)LONG_MIN);
-}
-
-unsigned int	ft_atoi(const char *str)
-{
-	size_t			i;
-	unsigned int	num;
-	int				neg_flg;
-
-	num = 0;
+	ans = 0;
 	i = 0;
-	neg_flg = 1;
-	while (str[i] == 32 || (9 <= str[i] && str[i] <= 13))
-		i++;
-	if (str[i] == '-')
+	while (str[i])
 	{
-		neg_flg = -1;
+		tmp = str[i] - '0';
+		if (ans > (2147483647 - tmp) / 10)
+			return (-1);
+		ans = ans * 10 + tmp;
 		i++;
 	}
-	else if (str[i] == '+')
-		i++;
-	while ('0' <= str[i] && str[i] <= '9')
-	{
-		if (checker(str[i], num, neg_flg))
-			return (checker2(neg_flg));
-		num = (num * 10) + (str[i] - '0');
-		i++;
-	}
-	num *= neg_flg;
-	return (num);
+	return (ans);
 }
 
-void	create_nord(int *num)
+t_info	*creat_node(char **argv)
 {
-	t_info	routine;
+	t_info	*ans;
+	int		num[5];
+	int		i;
 
-	routine.members = num[0];
-	routine.limit = num[1];
-	routine.eat = num[2];
-	routine.sleep = num[3];
-	if (num[4])
-		routine.meal = num[4];
-	else
-		routine.meal = NULL;
-	
+	i = 0;
+	while (++i < 6)
+	{
+		if (argv[i] == NULL)
+			num[i - 1] = 0;
+		else
+		{
+			num[i - 1] = ft_atoi(argv[i]);
+			if (num[i - 1] == -1)
+				return (NULL);
+		}
+	}
+	ans = (t_info *)malloc(sizeof(t_info));
+	if (ans == NULL)
+		return (NULL);
+	ans->members = num[0];
+	ans->limit = num[1];
+	ans->eat = num[2];
+	ans->sleep = num[3];
+	ans->meal = num[4];
+	return (ans);
 }
 
 int	main(int argc, char **argv)
 {
-	int		i;
-	int		num[5];
+	t_info	*routine;
 
-	if (argc < 5 || 6 < argc)
-		argc_error();
-	i = 1;
-	while (i < argc)
+	if (argc != 5 && argc != 6)
 	{
-		num[i - 1] = 0;
-		i++;
+		printf("Variable Error: There must be four or five variables.\n");
+		return (1);
 	}
-	i = 1;
-	while (argv[i])
+	if (check_numbers(argv))
 	{
-		num[i - 1] = ft_atoi(argv[i]);
-		if (num < 1)
-			number_error();
-		i++;
+		printf("Variable Error: Variables must be in integer type.\n");
+		return (1);
 	}
-	if (i == 5)
-		num[i - 1] = 0;
-	create_nord(num);
+	routine = creat_node(argv);
+	if (!routine)
+	{
+		printf("Malloc error or the numbers are not in integer type.\n");
+		return (1);
+	}
 }
