@@ -6,7 +6,7 @@
 /*   By: kawaharadaryou <kawaharadaryou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 13:23:34 by rkawahar          #+#    #+#             */
-/*   Updated: 2024/09/26 18:34:49 by kawaharadar      ###   ########.fr       */
+/*   Updated: 2024/09/27 00:37:07 by kawaharadar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,7 @@ int	main(int argc, char **argv)
 		printf("Malloc error or the numbers are not in integer type.\n");
 		return (1);
 	}
+	life_is_beautiful(routine);
+	free(routine);
+	return (0);
 }
