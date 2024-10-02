@@ -6,7 +6,7 @@
 /*   By: kawaharadaryou <kawaharadaryou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 12:30:52 by rkawahar          #+#    #+#             */
-/*   Updated: 2024/09/27 00:36:04 by kawaharadar      ###   ########.fr       */
+/*   Updated: 2024/10/02 12:43:08 by kawaharadar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 # include <pthread.h>
 # include <stdarg.h>
 # include <limits.h>
+
+# define THINK 1
+# define FORK 2
+# define SLEEP 3
+# define EAT 4
+
 typedef struct s_info
 {
 	int				members;
@@ -31,14 +37,15 @@ typedef struct s_info
 	int				meal;
 	long			*last_dinner;
 	long			party_start;
+	pthread_mutex_t	print;
 	pthread_mutex_t	*forks;
 	pthread_t		*threads;
 }	t_info;
 
 typedef struct s_identity
 {
-	int		name;
-	t_info	*routine;
+	int				name;
+	t_info			*routine;
 }	t_identity;
 
 int		check_numbers(char **num);
@@ -47,5 +54,6 @@ void	create_odd_philo(t_info *routine, int i);
 void	create_even_philo(t_info *routine, int i);
 long	gettime(void);
 void	wait_func(long time);
+void	printf_mutex(t_identity *identity, int type);
 
 #endif

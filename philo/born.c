@@ -6,7 +6,7 @@
 /*   By: kawaharadaryou <kawaharadaryou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 21:42:59 by kawaharadar       #+#    #+#             */
-/*   Updated: 2024/09/27 00:44:29 by kawaharadar      ###   ########.fr       */
+/*   Updated: 2024/10/02 12:43:02 by kawaharadar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ void	*odd_philos_move(void *identity_void)
 		left = &(identity->routine->forks[identity->name]);
 	while(1)
 	{
-		printf("%ld %d is thinking\n", gettime() - identity->routine->party_start, identity->name);
+		printf_mutex(identity, THINK);
 		pthread_mutex_lock(right);
-		printf("%ld %d has taken a fork\n", gettime() - identity->routine->party_start, identity->name);
+		printf_mutex(identity, FORK);
 		pthread_mutex_lock(left);
-		printf("%ld %d has taken a fork\n", gettime() - identity->routine->party_start, identity->name);
+		printf_mutex(identity, FORK);
 		identity->routine->last_dinner[identity->name - 1] = gettime() - identity->routine->party_start;
-		printf("%ld %d is eating\n", identity->routine->last_dinner[identity->name - 1], identity->name);
+		printf_mutex(identity, EAT);
 		wait_func(identity->routine->eat);
 		pthread_mutex_unlock(right);
 		pthread_mutex_unlock(left);
-		printf("%ld %d is sleeping\n", gettime() - identity->routine->party_start, identity->name);
+		printf_mutex(identity, SLEEP);
 		wait_func(identity->routine->sleep);
 	}
 }

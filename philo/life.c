@@ -6,7 +6,7 @@
 /*   By: kawaharadaryou <kawaharadaryou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 19:44:11 by kawaharadar       #+#    #+#             */
-/*   Updated: 2024/09/27 17:25:50 by kawaharadar      ###   ########.fr       */
+/*   Updated: 2024/10/01 20:35:30 by kawaharadar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	life_is_beautiful(t_info *routine)
 	if (routine->last_dinner == NULL)
 		return ;
 	routine->forks = set_forks(routine->members);
+	pthread_mutex_init(&(routine->print), NULL);
 	if (routine->forks == NULL)
 	{
 		free(routine->last_dinner);

@@ -6,7 +6,7 @@
 /*   By: kawaharadaryou <kawaharadaryou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 21:53:34 by kawaharadar       #+#    #+#             */
-/*   Updated: 2024/09/26 23:46:46 by kawaharadar      ###   ########.fr       */
+/*   Updated: 2024/10/02 12:40:40 by kawaharadar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,17 @@ void	wait_func(long time)
 			break;
 		usleep(150);
 	}
+}
+void	printf_mutex(t_identity *identity, int type)
+{
+	pthread_mutex_lock(&identity->routine->print);
+	if (type == THINK)
+		printf("%ld %d is thinking\n", gettime() - identity->routine->party_start, identity->name);
+	else if (type == FORK)
+		printf("%ld %d has taken a fork\n", gettime() - identity->routine->party_start, identity->name);
+	else if (type == EAT)
+		printf("%ld %d is eating\n", identity->routine->last_dinner[identity->name - 1], identity->name);
+	else if (type == SLEEP)
+		printf("%ld %d is sleeping\n", gettime() - identity->routine->party_start, identity->name);
+	pthread_mutex_unlock(&identity->routine->print);
 }
