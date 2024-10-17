@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kawaharadaryou <kawaharadaryou@student.    +#+  +:+       +#+        */
+/*   By: rkawahar <rkawahar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:58:39 by kawaharadar       #+#    #+#             */
-/*   Updated: 2024/10/17 19:13:59 by kawaharadar      ###   ########.fr       */
+/*   Updated: 2024/10/18 00:25:26 by rkawahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,12 @@ void	*philos_life(void *routine)
 	return (NULL);
 }
 
-void	life_is_beautiful(t_info *routine)
+void	life_is_beautiful(t_info *routine, int *num)
 {
 	t_info		*first;
 	pthread_t	the_death;
 
+	(void)num;
 	first = routine;
 	while (routine)
 	{
@@ -67,10 +68,12 @@ void	life_is_beautiful(t_info *routine)
 		routine = routine->next;
 	}
 	pthread_create(&the_death, NULL, the_death_life, first);
+	routine = first;
 	while (first)
 	{
 		pthread_join(first->thread, NULL);
 		first = first->next;
 	}
 	pthread_join(the_death, NULL);
+	ft_free(num, routine);
 }

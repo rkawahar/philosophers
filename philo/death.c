@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   death.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kawaharadaryou <kawaharadaryou@student.    +#+  +:+       +#+        */
+/*   By: rkawahar <rkawahar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 01:13:06 by kawaharadar       #+#    #+#             */
-/*   Updated: 2024/10/17 19:16:36 by kawaharadar      ###   ########.fr       */
+/*   Updated: 2024/10/18 00:49:10 by rkawahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,25 @@ int	checker(t_info *life)
 	return (ans);
 }
 
+t_info	*judge(t_info *life)
+{
+	if (life->next)
+			life = life->next;
+	else
+	{
+		while (life->pre)
+			life = life->pre;
+	}
+	return (life);
+}
+
 void	*the_death_life(void *routine)
 {
 	t_info	*life;
-	t_info	*first;
 	long	time;
 	long	lastdinner;
 
 	life = (t_info *)routine;
-	first = (t_info *)routine;
 	while (1)
 	{
 		pthread_mutex_lock(life->time_check);
@@ -47,14 +57,10 @@ void	*the_death_life(void *routine)
 			if (checker(life) == 0)
 				print_death(routine);
 		}
-		// pthread_mutex_unlock(life->time_check);
 		wait_func(20, life);
 		if (check_death_flg(life) || checker(life))
 			break ;
-		if (life->next)
-			life = life->next;
-		else
-			life = first;
+		life = judge(life);
 	}
 	return (NULL);
 }

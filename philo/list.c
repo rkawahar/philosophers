@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kawaharadaryou <kawaharadaryou@student.    +#+  +:+       +#+        */
+/*   By: rkawahar <rkawahar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:20:11 by kawaharadar       #+#    #+#             */
-/*   Updated: 2024/10/16 22:55:10 by kawaharadar      ###   ########.fr       */
+/*   Updated: 2024/10/17 22:50:15 by rkawahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	init_fork(t_info *lis)
 
 void	create_fork(t_info *lis)
 {
-	pthread_mutex_t *print_mutex;
+	pthread_mutex_t	*print_mutex;
 	long			time;
 	int				*death_flg;
 	pthread_mutex_t	*death_mutex;

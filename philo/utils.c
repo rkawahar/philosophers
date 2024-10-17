@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kawaharadaryou <kawaharadaryou@student.    +#+  +:+       +#+        */
+/*   By: rkawahar <rkawahar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 21:53:34 by kawaharadar       #+#    #+#             */
-/*   Updated: 2024/10/17 19:24:24 by kawaharadar      ###   ########.fr       */
+/*   Updated: 2024/10/17 22:52:45 by rkawahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ long	gettime(void)
 	ans = time.tv_sec * 1000 + time.tv_usec / 1000;
 	return (ans);
 }
+
 void	wait_func(long time, t_info *life)
 {
-	long 	wait_start;
+	long	wait_start;
 	long	finish_time;
 
 	wait_start = gettime();
@@ -38,7 +39,7 @@ void	wait_func(long time, t_info *life)
 	while (1)
 	{
 		if (finish_time < gettime() || check_death_flg(life))
-			break;
+			break ;
 		usleep(150);
 	}
 }
@@ -46,6 +47,7 @@ void	wait_func(long time, t_info *life)
 void	print_mutex(t_info *life, int type)
 {
 	long	time;
+
 	pthread_mutex_lock(life->death_check);
 	if (*(life->death) == 1 || life->euthanasia)
 	{

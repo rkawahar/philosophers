@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kawaharadaryou <kawaharadaryou@student.    +#+  +:+       +#+        */
+/*   By: rkawahar <rkawahar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 12:30:52 by rkawahar          #+#    #+#             */
-/*   Updated: 2024/10/17 21:33:10 by kawaharadar      ###   ########.fr       */
+/*   Updated: 2024/10/18 00:04:31 by rkawahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_info
 {
 	int				members;
 	long			limit;
-	long 			eat;
+	long			eat;
 	long			sleep;
 	int				meal;
 	int				name;
@@ -47,18 +47,19 @@ typedef struct s_info
 	pthread_mutex_t	*time_check;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
-	struct s_info		*next;
-	struct s_info		*pre;
+	struct s_info	*next;
+	struct s_info	*pre;
 }	t_info;
 
 t_info	*create_list(int *num);
 long	gettime(void);
-void	life_is_beautiful(t_info *routine);
+void	life_is_beautiful(t_info *routine, int *num);
 void	wait_func(long time, t_info *life);
 void	print_mutex(t_info *life, int type);
 void	*the_death_life(void *routine);
 int		check_death_flg(t_info *life);
 void	print_death(t_info *life);
 void	philosopher(int *num);
+void	ft_free(int *num, t_info *life);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kawaharadaryou <kawaharadaryou@student.    +#+  +:+       +#+        */
+/*   By: rkawahar <rkawahar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 20:43:49 by kawaharadar       #+#    #+#             */
-/*   Updated: 2024/10/17 21:39:08 by kawaharadar      ###   ########.fr       */
+/*   Updated: 2024/10/18 00:05:44 by rkawahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*solo_dinner(void *av)
 	while (1)
 	{
 		if (finish_time < gettime())
-			break;
+			break ;
 		usleep(150);
 	}
 	printf("%ld 1 is died\n", gettime() - party_start);
@@ -34,10 +34,11 @@ void	*solo_dinner(void *av)
 
 void	philosopher(int *num)
 {
-	pthread_t *solo_life;
+	pthread_t	*solo_life;
 
 	solo_life = (pthread_t *)malloc(sizeof(t_info));
 	pthread_create(solo_life, NULL, solo_dinner, num);
 	pthread_join(*solo_life, NULL);
 	free(solo_life);
+	free(num);
 }
