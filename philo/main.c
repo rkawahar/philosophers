@@ -6,7 +6,7 @@
 /*   By: kawaharadaryou <kawaharadaryou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 13:23:34 by rkawahar          #+#    #+#             */
-/*   Updated: 2024/09/27 00:37:07 by kawaharadar      ###   ########.fr       */
+/*   Updated: 2024/10/17 21:57:46 by kawaharadar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,34 @@ int	ft_atoi(char *str)
 	return (ans);
 }
 
-t_info	*creat_node(char **argv)
+int	check_numbers(char **num)
 {
-	t_info	*ans;
-	int		num[5];
-	int		i;
+	int	i;
+	int	index;
 
+	i = 1;
+	while (num[i])
+	{
+		index = 0;
+		while(num[i][index])
+		{
+			if (num[i][index] < '0' || num[i][index] > '9')
+				return (1);
+			index++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	*ft_atois(char **argv)
+{
+	int	*num;
+	int	i;
+
+	num = (int *)malloc(sizeof(int) * 5);
+	if (num == NULL)
+		return (NULL);
 	i = 0;
 	while (++i < 6)
 	{
@@ -49,38 +71,49 @@ t_info	*creat_node(char **argv)
 				return (NULL);
 		}
 	}
-	ans = (t_info *)malloc(sizeof(t_info));
-	if (ans == NULL)
-		return (NULL);
-	ans->members = num[0];
-	ans->limit = num[1];
-	ans->eat = num[2];
-	ans->sleep = num[3];
-	ans->meal = num[4];
-	return (ans);
+	return (num);
+}
+
+void	ft_free(int *num, t_info *life)
+{
+	free(num);
+	free(life->death);
+	free(life->print);
+	free(life->right_fork);
+	while (life->next)
+	{
+		free(life->death_check);
+		free(life->time_check);
+		free(life->left_fork);
+		life = life->next;
+		free(life->pre);
+	}
+	free(life);
 }
 
 int	main(int argc, char **argv)
 {
 	t_info	*routine;
+	int		*num;
 
 	if (argc != 5 && argc != 6)
-	{
-		printf("Variable Error: There must be four or five variables.\n");
-		return (1);
-	}
+		return (printf("Variable Error: There must be four or five variables.\n"));
 	if (check_numbers(argv))
-	{
-		printf("Variable Error: Variables must be in integer type.\n");
+		return (printf("Variable Error: Variables must be in integer type.\n"));
+	num = ft_atois(argv);
+	if (num == NULL)
 		return (1);
-	}
-	routine = creat_node(argv);
-	if (!routine)
+	if (num[0] == 0)
+		return (printf("Argv must be bigger than 0.\n"));
+	if (num[0] == 1)
+		philosopher(num);
+	else
 	{
-		printf("Malloc error or the numbers are not in integer type.\n");
-		return (1);
+		routine = create_list(num);
+		if (!routine)
+			return (printf("Malloc error or the numbers are not in integer type.\n"));
+		life_is_beautiful(routine);
+		ft_free(num, routine);
 	}
-	life_is_beautiful(routine);
-	free(routine);
 	return (0);
 }
