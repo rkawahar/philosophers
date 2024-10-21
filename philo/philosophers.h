@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkawahar <rkawahar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kawaharadaryou <kawaharadaryou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 12:30:52 by rkawahar          #+#    #+#             */
-/*   Updated: 2024/10/18 00:04:31 by rkawahar         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:23:39 by kawaharadar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	wait_func(long time, t_info *life);
 void	print_mutex(t_info *life, int type);
 void	*the_death_life(void *routine);
 int		check_death_flg(t_info *life);
-void	print_death(t_info *life);
 void	philosopher(int *num);
 void	ft_free(int *num, t_info *life);
+void	print_death(t_info *life, long time);
 
 #endif

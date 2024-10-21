@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkawahar <rkawahar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kawaharadaryou <kawaharadaryou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 21:53:34 by kawaharadar       #+#    #+#             */
-/*   Updated: 2024/10/17 22:52:45 by rkawahar         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:23:09 by kawaharadar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	print_death(t_info *life)
+void	print_death(t_info *life, long time)
 {
 	pthread_mutex_lock(life->print);
-	printf("%ld %d is died\n", gettime() - life->party_start, life->name);
+	printf("%ld %d died\n", time, life->name);
 	pthread_mutex_unlock(life->print);
 }
 

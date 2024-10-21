@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   death.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkawahar <rkawahar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kawaharadaryou <kawaharadaryou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 01:13:06 by kawaharadar       #+#    #+#             */
-/*   Updated: 2024/10/18 00:49:10 by rkawahar         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:30:13 by kawaharadar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,8 @@ void	*the_death_life(void *routine)
 			*(life->death) = 1;
 			pthread_mutex_unlock(life->death_check);
 			if (checker(life) == 0)
-				print_death(routine);
+				print_death(routine, time + lastdinner);
 		}
-		wait_func(20, life);
 		if (check_death_flg(life) || checker(life))
 			break ;
 		life = judge(life);

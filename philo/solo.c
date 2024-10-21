@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkawahar <rkawahar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kawaharadaryou <kawaharadaryou@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 20:43:49 by kawaharadar       #+#    #+#             */
-/*   Updated: 2024/10/18 00:05:44 by rkawahar         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:16:26 by kawaharadar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	*solo_dinner(void *av)
 			break ;
 		usleep(150);
 	}
-	printf("%ld 1 is died\n", gettime() - party_start);
+	printf("%ld 1 died\n", gettime() - party_start);
 	return (NULL);
 }
 
