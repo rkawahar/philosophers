@@ -6,7 +6,7 @@
 /*   By: rkawahar <rkawahar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 19:58:39 by kawaharadar       #+#    #+#             */
-/*   Updated: 2024/10/18 00:25:26 by rkawahar         ###   ########.fr       */
+/*   Updated: 2024/10/24 20:37:54 by rkawahar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	*philos_life(void *routine)
 		print_mutex(philo, EAT);
 		eat_counter(philo, ++eat_time);
 		wait_func(philo->eat, philo);
-		pthread_mutex_unlock(philo->right_fork);
 		pthread_mutex_unlock(philo->left_fork);
+		pthread_mutex_unlock(philo->right_fork);
 		print_mutex(philo, SLEEP);
 		wait_func(philo->sleep, philo);
 		print_mutex(philo, THINK);
